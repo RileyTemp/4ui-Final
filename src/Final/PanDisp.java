@@ -29,12 +29,6 @@ public class PanDisp extends JPanel {
         sLabel = _sNew;
         lblName.setText(sLabel);
     }
-
-    void UpdateBackground(Color c) {
-        //sColour = _sNew;
-        //sColour = "Color."+_sNew;
-        setBackground(Color.cyan);
-    }
     ActionListener updateTask = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent evt) {
