@@ -39,7 +39,6 @@ public class PanQuest extends JPanel {
             add(lblname);
             add(btnVel);
             add(btnGrav);
-
         } else if (sLabel.equals("Functions")) {
             nCounter = 2;
             setLayout(new GridLayout(1, 1));
