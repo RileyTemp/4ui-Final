@@ -9,7 +9,6 @@ public class PanMain extends JPanel {
     PanDisp panDisp = new PanDisp(panOut);
     PanQuest panQuest = new PanQuest();
     PanUnit panUnit = new PanUnit(panDisp, panQuest);
-    PanVel panVel = new PanVel();
     private PanOut PanOut;
 
     public PanMain() {

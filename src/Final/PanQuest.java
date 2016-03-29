@@ -11,13 +11,12 @@ import java.awt.event.ActionListener;
 
 public class PanQuest extends JPanel {
 
+    PanDisp panDisp;
     JLabel lblname;
     private String sLabel;
     JButton btnVel, btnGrav;
     int nCounter = 0;
-
-    public PanQuest() {
-    }
+    String sQuest;
 
     void UpdateQuestions(String _sNew) {
         if (nCounter == 1) {
@@ -28,7 +27,6 @@ public class PanQuest extends JPanel {
             remove(lblname);
         }
         sLabel = _sNew;
-
         btnVel = new JButton("Velocity");
         btnGrav = new JButton("Gravity");
         //chooses which buttons to spawn based on which unit is made title
@@ -39,6 +37,20 @@ public class PanQuest extends JPanel {
             add(lblname);
             add(btnVel);
             add(btnGrav);
+
+            class QuestionChooser implements ActionListener {
+                
+                public void actionPerformed(ActionEvent event) {
+                    JButton btn = (JButton) event.getSource();
+                    sQuest = btn.getText();
+                    if (sQuest.equals("Velocity")) {
+                    } else if (sQuest.equals("Gravity")) {                    
+                    }
+                }
+            }
+            ActionListener questionChooser = new QuestionChooser();
+            btnVel.addActionListener(questionChooser);
+            btnGrav.addActionListener(questionChooser);
         } else if (sLabel.equals("Functions")) {
             nCounter = 2;
             setLayout(new GridLayout(1, 1));
