@@ -26,13 +26,20 @@ public class PanUnit extends JPanel {
 
             public void actionPerformed(ActionEvent event) {
                 JButton btn = (JButton) event.getSource();
-                sName = btn.getText(); // gets the text value of the button   
-                panDisp.UpdateLabel(sName);// Sends the new label name to PanDisp
-                panQuest.UpdateQuestions(sName);// Sends the name of which unit the user chose
+                sName = btn.getText(); // gets the text value of the button
+                if (sName.equals("Physics")) {
+                    panDisp.UpdateLabel(sName);// Sends the new label name to PanDisp
+                    panQuest.Physics(sName);// Sends the name of which unit the user chose
+                } else if (sName.equals("Functions")) {
+                    panDisp.UpdateLabel(sName);
+                    panQuest.Functions(sName);
+                }
             }
         }
         ActionListener labelChangeListener = new LabelChangeListener();
+
         btnPhysics.addActionListener(labelChangeListener);
+
         btnFunctions.addActionListener(labelChangeListener);
     }
 }
