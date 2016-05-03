@@ -1,4 +1,3 @@
-
 package Final;
 
 import javax.swing.*;
@@ -7,14 +6,15 @@ import java.awt.event.ActionListener;
 
 public class PanFunctions extends JPanel {
 
-    JLabel lblname;
-    PanTitleF panTitleF;
+    //PanUnitChooser panUnitChooser;
+    PanUnitChooserF panUnitChooser;
     PanTabbedF panTabbedF = new PanTabbedF();
 
-    public PanFunctions(ActionListener buttonListener, PanTitleF _panTitleF) {
-        panTitleF = _panTitleF;
+    public PanFunctions(ActionListener buttonListener, PanUnitChooserF _panUnitChooser) {
+        panUnitChooser = _panUnitChooser;
         setLayout(new BorderLayout());
-        add(panTitleF, BorderLayout.NORTH);
+        System.out.println("hahaha");
+        add(panUnitChooser, BorderLayout.NORTH);
         add(panTabbedF, BorderLayout.WEST);
     }
 }

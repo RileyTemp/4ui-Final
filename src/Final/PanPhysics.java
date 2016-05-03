@@ -7,16 +7,22 @@ import java.awt.event.ActionListener;
 
 public class PanPhysics extends JPanel {
 
-    PanTitleP panTitle;
+    JPanel panMaster;
+    CardLayout cardLayout;
+    PanUnitChooserP panUnitChooser;
     PanDispP panDispP = new PanDispP();
     PanTabbedP panTabbedP = new PanTabbedP(panDispP);
 
-    public PanPhysics(ActionListener buttonListener, PanTitleP _panTitle) {
+    public PanPhysics(ActionListener buttonListener, PanUnitChooserP _panUnitChooser) {
 
-        panTitle = _panTitle;
+        panUnitChooser = _panUnitChooser;
         setLayout(new BorderLayout());
-        add(panDispP, BorderLayout.CENTER);
-        add(panTitle, BorderLayout.NORTH);
+        add(panUnitChooser, BorderLayout.NORTH);
         add(panTabbedP, BorderLayout.WEST);
     }
 }
+/*panMaster = new JPanel(new CardLayout());
+        panMaster.add(panFirst);
+        panMaster.add(panFunctions);
+        panMaster.add(panPhysics);
+        getContentPane().add(panMaster);*/

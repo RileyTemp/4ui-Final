@@ -5,20 +5,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class PanFirst extends JPanel {
-    //JButton btnNext, btnPrev;
+public class PanFirstCard extends JPanel {    
 
     JButton btnPhysics, btnFunctions;
     JLabel lblname;
 
-    public PanFirst(ActionListener buttonListener) {
+    public PanFirstCard(ActionListener unitChooser) {
         lblname = new JLabel("Choose a unit");
         btnPhysics = new JButton("Physics Unit");
         btnFunctions = new JButton("Functions Unit");
         add(lblname);
         add(btnPhysics);
         add(btnFunctions);
-        btnPhysics.addActionListener(buttonListener);
-        btnFunctions.addActionListener(buttonListener);
+        btnPhysics.addActionListener(unitChooser);
+        btnFunctions.addActionListener(unitChooser);
     }
 }

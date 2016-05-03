@@ -9,7 +9,7 @@ public class PanTabbedP extends JPanel {
 
     PanDispP panDispP;
 
-    public PanTabbedP(PanDispP _panDispP) {
+    public PanTabbedP( PanDispP _panDispP) {
         panDispP = _panDispP;
         JTabbedPane tabbedPane = new JTabbedPane();
 
@@ -17,14 +17,13 @@ public class PanTabbedP extends JPanel {
         tabbedPane.addTab("Velocity", panel1);
         panel1.setLayout(new GridLayout(3, 1));
         panel1.setPreferredSize(new Dimension(200, 350));
-        String[] backgrounds = {"Person", "Skateboard", "Car", "Rocket Ship"};
+        String[] backgrounds = {"Choose a Unit", "Person", "Skateboard", "Car", "Rocket Ship"};
         final JComboBox cb = new JComboBox(backgrounds);
         //http://stackoverflow.com/questions/14306125/how-to-use-actionlistener-on-a-combobox-to-give-a-variable-a-value
         ActionListener objectChooser = new ObjectChooser() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String s = (String) cb.getSelectedItem();
-                panDispP.background(s);
             }
         };
         cb.addActionListener(objectChooser);

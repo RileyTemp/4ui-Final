@@ -5,24 +5,24 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class FraMain extends JFrame {
-
+    
     JPanel panMaster;
     CardLayout cardLayout;
-
+    
     public FraMain() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ActionListener buttonListener = new ButtonListener();
-        ActionListener buttonChanger = new ButtonChanger();
+        ActionListener unitChooser = new UnitChooser();
+        ActionListener unitChanger = new UnitChanger();
         setLayout(new BorderLayout());
         setSize(810, 510);
         setTitle("Final Project");
         setResizable(true);
         setLocationRelativeTo(null);
-        PanTitleF panTitleF = new PanTitleF(buttonChanger);
-        PanTitleP panTitleP = new PanTitleP(buttonChanger);
-        PanFirst panFirst = new PanFirst(buttonListener);
-        PanFunctions panFunctions = new PanFunctions(buttonListener, panTitleF);
-        PanPhysics panPhysics = new PanPhysics(buttonListener, panTitleP);
+        PanUnitChooserP panUnitChooserP = new PanUnitChooserP(unitChanger);
+        PanUnitChooserF panUnitChooserF = new PanUnitChooserF(unitChanger);
+        PanFirstCard panFirst = new PanFirstCard(unitChooser);
+        PanFunctions panFunctions = new PanFunctions(unitChooser, panUnitChooserF);
+        PanPhysics panPhysics = new PanPhysics(unitChooser, panUnitChooserP);
         panMaster = new JPanel(new CardLayout());
         panMaster.add(panFirst);
         panMaster.add(panFunctions);
@@ -31,9 +31,9 @@ public class FraMain extends JFrame {
         setVisible(true);
         cardLayout = (CardLayout) panMaster.getLayout();
     }
-
-    class ButtonListener implements ActionListener {
-
+    
+    class UnitChooser implements ActionListener {
+        
         @Override
         public void actionPerformed(ActionEvent event) {
             JButton btn = (JButton) event.getSource();
@@ -48,18 +48,19 @@ public class FraMain extends JFrame {
             }
         }
     }
-
-    class ButtonChanger implements ActionListener {
-
+    
+    class UnitChanger implements ActionListener {
+        
         public void actionPerformed(ActionEvent event) {
             JButton btn = (JButton) event.getSource();
             String sChoice = btn.getText();
             System.out.println(sChoice);
-            if (sChoice.equals("Functions")) {
+            if (sChoice.equals("Functions Unit")) {
+                cardLayout.last(panMaster);
                 cardLayout.previous(panMaster);
             }
-            if (sChoice.equals("Physics")) {
-                cardLayout.next(panMaster);
+            if (sChoice.equals("Physics Unit")) {
+                cardLayout.last(panMaster);
             }
         }
     }
