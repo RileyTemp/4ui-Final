@@ -5,35 +5,35 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class FraMain extends JFrame {
-    
+
     JPanel panMaster;
     CardLayout cardLayout;
-    
+
     public FraMain() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ActionListener unitChooser = new UnitChooser();
         ActionListener unitChanger = new UnitChanger();
         setLayout(new BorderLayout());
-        setSize(810, 510);
+        setSize(1200, 600);
         setTitle("Final Project");
         setResizable(true);
         setLocationRelativeTo(null);
-        PanUnitChooserP panUnitChooserP = new PanUnitChooserP(unitChanger);
-        PanUnitChooserF panUnitChooserF = new PanUnitChooserF(unitChanger);
+        PanUnitChooser panUnitChooser = new PanUnitChooser(unitChanger);
         PanFirstCard panFirst = new PanFirstCard(unitChooser);
-        PanFunctions panFunctions = new PanFunctions(unitChooser, panUnitChooserF);
-        PanPhysics panPhysics = new PanPhysics(unitChooser, panUnitChooserP);
+        PanFunctions panFunctions = new PanFunctions(unitChooser);
+        PanPhysics panPhysics = new PanPhysics(unitChooser);
         panMaster = new JPanel(new CardLayout());
         panMaster.add(panFirst);
         panMaster.add(panFunctions);
         panMaster.add(panPhysics);
+        add(panUnitChooser, BorderLayout.NORTH);
         getContentPane().add(panMaster);
         setVisible(true);
         cardLayout = (CardLayout) panMaster.getLayout();
     }
-    
+
     class UnitChooser implements ActionListener {
-        
+
         @Override
         public void actionPerformed(ActionEvent event) {
             JButton btn = (JButton) event.getSource();
@@ -48,9 +48,9 @@ public class FraMain extends JFrame {
             }
         }
     }
-    
+
     class UnitChanger implements ActionListener {
-        
+
         public void actionPerformed(ActionEvent event) {
             JButton btn = (JButton) event.getSource();
             String sChoice = btn.getText();

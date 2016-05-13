@@ -5,7 +5,6 @@ import java.awt.*;
 
 public class PanTabbedF extends JPanel {
 
-
     public PanTabbedF() {
         JTabbedPane tabbedPane = new JTabbedPane();
 
