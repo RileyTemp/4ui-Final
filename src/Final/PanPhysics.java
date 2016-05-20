@@ -13,7 +13,7 @@ public class PanPhysics extends JPanel {
     PanSidewalk panSidewalk = new PanSidewalk();
     PanRoad panRoad = new PanRoad();
     PanSpace panSpace = new PanSpace();
-    PanPark panPark = new PanPark();
+    PanSkatePark panPark = new PanSkatePark();
     PanTabbedP panTabbedP = new PanTabbedP(panDispP, panSidewalk, panRoad, panSpace, panPark);
     
     public PanPhysics(ActionListener buttonListener) {

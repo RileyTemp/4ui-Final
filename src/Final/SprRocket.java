@@ -2,23 +2,24 @@ package Final;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
-public class SprPerson {
+public class SprRocket {
 
     private Image img;
     int i;
     int x, y, bx, by, dx, dy, backgroundX;
     int Speed = 5;
     boolean left, right, up, down;
-    ImageIcon p1 = new ImageIcon("walkingL.png");// Looking Left
-    ImageIcon p2 = new ImageIcon("walkingR.png");// Looking Right
+    ImageIcon p1 = new ImageIcon("spaceshipL.png");// Looking Left
+    ImageIcon p2 = new ImageIcon("spaceshipR.png");// Looking Right
+    ImageIcon p3 = new ImageIcon("spaceshipU.png");
+    ImageIcon p4 = new ImageIcon("spaceshipD.png");
     int imgWidth = p1.getIconHeight();
     int imgHeight = p2.getIconWidth();
-    Image arnRunning_R[] = new Image[2];
+    Image arnRunning_R[] = new Image[4];
     Rectangle r;
 
-    public SprPerson() {
+    public SprRocket() {
         r = new Rectangle();
         x = 550;
         y = 200;
@@ -30,7 +31,8 @@ public class SprPerson {
         down = false;
         arnRunning_R[0] = p1.getImage();
         arnRunning_R[1] = p2.getImage();
-
+        arnRunning_R[2] = p3.getImage();
+        arnRunning_R[3] = p4.getImage();
     }
 
     public Rectangle getRect() {

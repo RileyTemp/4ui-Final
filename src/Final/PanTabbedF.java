@@ -8,7 +8,7 @@ public class PanTabbedF extends JPanel {
     public PanTabbedF() {
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        JComponent panel1 = makeTextPanel("Velocity");
+        JComponent panel1 = makeTextPanel("Functions Stuff");
         tabbedPane.addTab("Graphing Calculator", panel1);
         panel1.setPreferredSize(new Dimension(200, 350));
         add(tabbedPane);
