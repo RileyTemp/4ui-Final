@@ -1,10 +1,11 @@
-
 package Final;
+
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
+
 public class SprCar {
-    
+
     private Image img;
     int i;
     int x, y, bx, by, dx, dy, backgroundX;
@@ -53,5 +54,31 @@ public class SprCar {
     public Image getImage() {
         img = arnRunning_R[i];
         return img;
+    }
+
+    public void setSide(int _i) {
+        i = _i;
+    }
+
+    public void setX(int _dx) {
+        dx = _dx;
+        x += dx;
+        dx = 0;
+        if (x <= -245) {
+            x = 1000;
+        } else if (x >= 1000) {
+            x = -245;
+        }
+    }
+
+    public void setY(int _dy) {
+        dy = _dy;
+        y += dy;
+        dy = 0;
+        if (y <= -220) {
+            y = 650;
+        } else if (y >= 650) {
+            y = -220;
+        }
     }
 }

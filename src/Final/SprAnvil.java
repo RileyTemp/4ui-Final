@@ -1,27 +1,26 @@
 package Final;
 
-import java.awt.event.*;
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
-public class SprSkateboard {
+public class SprAnvil {
 
     private Image img;
     int i;
     int x, y, bx, by, dx, dy, backgroundX;
     int Speed = 5;
     boolean left, right, up, down;
-    ImageIcon p1 = new ImageIcon("skateboardL.png");// Looking Left
-    ImageIcon p2 = new ImageIcon("skateboardR.png");// Looking Right
+    ImageIcon p1 = new ImageIcon("anvil.png");// Looking Left
+    ImageIcon p2 = new ImageIcon("anvil.png");// Looking Right
     int imgWidth = p1.getIconHeight();
     int imgHeight = p2.getIconWidth();
     Image arnRunning_R[] = new Image[2];
     Rectangle r;
 
-    public SprSkateboard() {
+    public SprAnvil() {
         r = new Rectangle();
-        x = 555;
-        y = 315;
+        x = 400;
+        y = 0;
         dx = 0;
         dy = 0;
         left = false;
@@ -38,11 +37,6 @@ public class SprSkateboard {
         return r;
     }
 
-    public void move() {
-        x += dx;
-        y += dy;
-    }
-
     public int getX() {
         return x;
     }
@@ -56,22 +50,18 @@ public class SprSkateboard {
         return img;
     }
 
-    public void setSide(int _i) {
-        i = _i;
-    }
-
-    public void setX(int _dx) {
+    void setX(int _dx) {
         dx = _dx;
         x += dx;
         dx = 0;
-        if (x <= -245) {
+        if (x >= 1000) {
+            x = -255;
+        } else if (x <= -255) {
             x = 1000;
-        } else if (x >= 1000) {
-            x = -245;
         }
     }
 
-    public void setY(int _dy) {
+    void setY(int _dy) {
         dy = _dy;
         y += dy;
         dy = 0;
@@ -81,4 +71,9 @@ public class SprSkateboard {
             y = -220;
         }
     }
+
+    void falling() {
+        y += 9.8;
+    }
 }
+

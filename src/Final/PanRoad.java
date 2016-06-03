@@ -14,9 +14,14 @@ public class PanRoad extends JPanel implements ActionListener {
     static String sName;
     Label JLabel;
     int dx, dy;
-    int nSpeed = 10;
+    int Speed = 10;
+    PanTimer panTimer;
+    String s;
+    int nCount = 0;
+    String sSame = "h";
 
-    public PanRoad() {
+    public PanRoad(PanTimer _panTimer) {
+        panTimer = _panTimer;
         addKeyListener(new Movement());
         setFocusable(true);
         ImageIcon i1 = new ImageIcon("road.jpg");
@@ -54,46 +59,68 @@ public class PanRoad extends JPanel implements ActionListener {
         @Override
         public void keyPressed(KeyEvent w) {
             int code = w.getKeyCode();
+            System.out.println(sSame);
             if (code == KeyEvent.VK_A) {
-                sprCar.i = 0;
-                dx = -nSpeed;
-                sprCar.x += dx;
-                if (sprCar.x <= -245) {
-                    sprCar.x = 1000;
+                s = "a";
+                if (!sSame.equals(s)) {
+                    Speed = 10;
+                }
+                sprCar.setSide(0);
+                sSame = s;
+                panTimer.start(s);
+                dx = -Speed;
+                sprCar.setX(dx);
+                if (panTimer.nCount > nCount) {
+                    Speed += 5;
+                    nCount = panTimer.nCount;
                 }
             } else if (code == KeyEvent.VK_D) {
-                sprCar.i = 1;
-                dx = nSpeed;
-                sprCar.x += dx;
-                if (sprCar.x >= 1000) {
-                    sprCar.x = -255;
+                s = "d";
+                if (!sSame.equals(s)) {
+                    Speed = 10;
+                }
+                sprCar.setSide(1);
+                sSame = s;
+                panTimer.start(s);
+                dx = Speed;
+                sprCar.setX(dx);
+                if (panTimer.nCount > nCount) {
+                    Speed += 5;
+                    nCount = panTimer.nCount;
                 }
             } else if (code == KeyEvent.VK_W) {
-                dy = -nSpeed;
-                sprCar.y += dy;
-                if (sprCar.y <= -220) {
-                    sprCar.y = 650;
+                s = "w";
+                if (!sSame.equals(s)) {
+                    Speed = 10;
+                }
+                sSame = s;
+                panTimer.start(s);
+                dy = -Speed;
+                sprCar.setY(dy);
+                if (panTimer.nCount > nCount) {
+                    Speed += 5;
+                    nCount = panTimer.nCount;
                 }
             } else if (code == KeyEvent.VK_S) {
-                dy = nSpeed;
-                sprCar.y += dy;
-                if (sprCar.y >= 650) {
-                    sprCar.y = -220;
+                s = "s";
+                if (!sSame.equals(s)) {
+                    Speed = 10;
                 }
+                sSame = s;
+                panTimer.start(s);
+                dy = Speed;
+                sprCar.setY(dy);
+                if (panTimer.nCount > nCount) {
+                    Speed += 5;
+                    nCount = panTimer.nCount;
+                }
+            }
+            if (Speed > 33) {
+                Speed = 33;
             }
         }
     }
 
     void display(int n) {
-    }
-
-    void SpeedChange(String _s) {
-        String Change = _s;
-        System.out.println(Change);
-        if (Change.equals("Speed Up")) {
-            nSpeed += 5;
-        } else if (Change.equals("Slow Down")) {
-            nSpeed -= 5;
-        }
     }
 }

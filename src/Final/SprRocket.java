@@ -57,4 +57,30 @@ public class SprRocket {
         img = arnRunning_R[i];
         return img;
     }
+
+    public void setSide(int _i) {
+        i = _i;
+    }
+
+    public void setX(int _dx) {
+        dx = _dx;
+        x += dx;
+        dx = 0;
+        if (x <= -245) {
+            x = 1000;
+        } else if (x >= 1000) {
+            x = -245;
+        }
+    }
+
+    public void setY(int _dy) {
+        dy = _dy;
+        y += dy;
+        dy = 0;
+        if (y <= -220) {
+            y = 650;
+        } else if (y >= 650) {
+            y = -220;
+        }
+    }
 }

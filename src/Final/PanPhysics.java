@@ -6,29 +6,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanPhysics extends JPanel {
-    
+
     JPanel panMaster;
     CardLayout cardLayout;
     PanDispP panDispP = new PanDispP();
-    PanSidewalk panSidewalk = new PanSidewalk();
-    PanRoad panRoad = new PanRoad();
-    PanSpace panSpace = new PanSpace();
-    PanSkatePark panPark = new PanSkatePark();
-    PanTabbedP panTabbedP = new PanTabbedP(panDispP, panSidewalk, panRoad, panSpace, panPark);
-    
+    PanTimer panTimer = new PanTimer();
+    PanSidewalk panSidewalk = new PanSidewalk(panTimer);
+    PanRoad panRoad = new PanRoad(panTimer);
+    PanSpace panSpace = new PanSpace(panTimer);
+    PanSkatePark panPark = new PanSkatePark(panTimer);
+    PanEarth panEarth = new PanEarth();
+    PanMars panMars = new PanMars();
+    PanJupiter panJupiter = new PanJupiter();
+    PanButtonTimer panButtonTimer = new PanButtonTimer(panEarth, panMars, panJupiter);
+    PanTabbedP panTabbedP = new PanTabbedP(panDispP, panSidewalk, panRoad, panSpace, panPark, panEarth, panMars, panJupiter, panButtonTimer);
+
     public PanPhysics(ActionListener buttonListener) {
-        
+
         setLayout(new BorderLayout());
         add(panTabbedP, BorderLayout.WEST);
         add(panDispP, BorderLayout.CENTER);
-        //add(panSidewalk, BorderLayout.CENTER);
-        //add(panRoad, BorderLayout.CENTER);
-        //add(panSpace, BorderLayout.CENTER);
-        //add(panPark, BorderLayout.CENTER);
-        panSidewalk.setVisible(false);
-        panRoad.setVisible(false);
-        panSpace.setVisible(false);
-        panPark.setVisible(false);
     }
 }
 

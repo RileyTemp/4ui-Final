@@ -14,10 +14,14 @@ public class PanSpace extends JPanel implements ActionListener {
     static String sName;
     Label JLabel;
     int dx, dy;
-    int nSpeed = 20;
+    int Speed = 20;
+    PanTimer panTimer;
+    String s;
     int nCount = 0;
+    String sSame = "h";
 
-    public PanSpace() {
+    public PanSpace(PanTimer _panTimer) {
+        panTimer = _panTimer;
         addKeyListener(new Movement());
         setFocusable(true);
         ImageIcon i1 = new ImageIcon("space.jpg");
@@ -57,48 +61,70 @@ public class PanSpace extends JPanel implements ActionListener {
         @Override
         public void keyPressed(KeyEvent w) {
             int code = w.getKeyCode();
+            System.out.println(sSame);
             if (code == KeyEvent.VK_A) {
-                sprRocket.i = 0;
-                dx = -nSpeed;
-                sprRocket.x += dx;
-                if (sprRocket.x <= -245) {
-                    sprRocket.x = 1000;
+                s = "a";
+                if (!sSame.equals(s)) {
+                    Speed = 20;
+                }
+                sprRocket.setSide(0);
+                sSame = s;
+                panTimer.start(s);
+                dx = -Speed;
+                sprRocket.setX(dx);
+                if (panTimer.nCount > nCount) {
+                    Speed += 10;
+                    nCount = panTimer.nCount;
                 }
             } else if (code == KeyEvent.VK_D) {
-                sprRocket.i = 1;
-                dx = nSpeed;
-                sprRocket.x += dx;
-                if (sprRocket.x >= 1000) {
-                    sprRocket.x = -255;
+                s = "d";
+                if (!sSame.equals(s)) {
+                    Speed = 20;
+                }
+                sprRocket.setSide(1);
+                sSame = s;
+                panTimer.start(s);
+                dx = Speed;
+                sprRocket.setX(dx);
+                if (panTimer.nCount > nCount) {
+                    Speed += 10;
+                    nCount = panTimer.nCount;
                 }
             } else if (code == KeyEvent.VK_W) {
-                sprRocket.i = 2;
-                dy = -nSpeed;
-                sprRocket.y += dy;
-                if (sprRocket.y <= -220) {
-                    sprRocket.y = 650;
+                s = "w";
+                if (!sSame.equals(s)) {
+                    Speed = 20;
+                }
+                sprRocket.setSide(2);
+                sSame = s;
+                panTimer.start(s);
+                dy = -Speed;
+                sprRocket.setY(dy);
+                if (panTimer.nCount > nCount) {
+                    Speed += 10;
+                    nCount = panTimer.nCount;
                 }
             } else if (code == KeyEvent.VK_S) {
-                sprRocket.i = 3;
-                dy = nSpeed;
-                sprRocket.y += dy;
-                if (sprRocket.y >= 650) {
-                    sprRocket.y = -220;
+                s = "s";
+                if (!sSame.equals(s)) {
+                    Speed = 20;
                 }
+                sprRocket.setSide(3);
+                sSame = s;
+                panTimer.start(s);
+                dy = Speed;
+                sprRocket.setY(dy);
+                if (panTimer.nCount > nCount) {
+                    Speed += 10;
+                    nCount = panTimer.nCount;
+                }
+            }
+            if (Speed > 40) {
+                Speed = 40;
             }
         }
     }
 
     void display(int n) {
-    }
-
-    void SpeedChange(String _s) {
-        String Change = _s;
-        System.out.println(Change);
-        if (Change.equals("Speed Up")) {
-            nSpeed += 10;
-        } else if (Change.equals("Slow Down")) {
-            nSpeed -= 10;
-        };
     }
 }

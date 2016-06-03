@@ -55,4 +55,33 @@ public class SprPerson {
         img = arnRunning_R[i];
         return img;
     }
+
+    public void setSide(int _i) {
+        i = _i;
+    }
+
+    public void setY(int _dy) {
+        dy = _dy;
+        y += dy;
+        dy = 0;
+        if (y <= -220) {
+            y = 650;
+        } else if (y >= 650) {
+            y = -220;
+        }
+    }
+
+    public void setX(int _dx) {
+        dx = _dx;
+        x += dx;
+        dx = 0;
+        if (x >= 1000) {
+            x = -255;
+        } else if (x <= -255) {
+            x = 1000;
+        }
+    }
 }
+/*if (sprPerson.x >= 1000) {
+                    sprPerson.x = -255;
+                }*/
