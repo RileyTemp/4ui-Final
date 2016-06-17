@@ -18,7 +18,7 @@ public class PanTabbedP extends JPanel {
     PanJupiter panJupiter;
     PanButtonTimer panButtonTimer;
     ActionListener faller = new Faller();
-    String s, g;
+    String sBackground, sSprite;
 
     public PanTabbedP(PanDispP _panDispP, PanSidewalk _panSidewalk, PanRoad _panRoad, PanSpace _panSpace, PanSkatePark _panPark, PanEarth _panEarth, PanMars _panMars, PanJupiter _panJupiter, PanButtonTimer _panButtonTimer) {
 
@@ -44,27 +44,41 @@ public class PanTabbedP extends JPanel {
         ActionListener objectChooser = new ObjectChooser() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                s = (String) cb.getSelectedItem();
-                panDispP.BackgroundChooser(s, panSidewalk, panSpace, panRoad, panPark, panEarth, panMars, panJupiter);
+                sBackground = (String) cb.getSelectedItem();
+                panDispP.BackgroundChooser(sBackground, panSidewalk, panSpace, panRoad, panPark, panEarth, panMars, panJupiter);
             }
         };
         cb.addActionListener(objectChooser);
         panel1.add(cb);
-        JComponent panel2 = makeTextPanel("Choose a Planet");
+        JComponent panel2 = makeTextPanel("Choose a Planet and a Sprite");
         tabbedPane.addTab("Gravity", panel2);
         panel2.setLayout(new GridLayout(3, 1));
         String[] gravities = {"Choose a Planet", "Earth", "Mars", "Jupiter"};
+        // filler added to make it look nicer
+        JLabel filler = new JLabel("");
+        panel2.add(filler);
         final JComboBox cd = new JComboBox(gravities);
         ActionListener gravityChooser = new GravityChooser() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                s = (String) cd.getSelectedItem();
-                panDispP.BackgroundChooser(s, panSidewalk, panSpace, panRoad, panPark, panEarth, panMars, panJupiter);
-                panButtonTimer.Gravity(s);
+                sBackground = (String) cd.getSelectedItem();
+                panDispP.BackgroundChooser(sBackground, panSidewalk, panSpace, panRoad, panPark, panEarth, panMars, panJupiter);
+                panButtonTimer.Gravity(sBackground);
             }
         };
         cd.addActionListener(gravityChooser);
         panel2.add(cd);
+        String[] sprites = {"Choose a Sprite", "Anvil", "Person", "Leaf"};
+        final JComboBox cg = new JComboBox(sprites);
+        ActionListener spriteChooser = new SpriteChooser() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sSprite = (String) cg.getSelectedItem();
+                panDispP.SpriteChooser(sSprite);
+            }
+        };
+        cg.addActionListener(spriteChooser);
+        panel2.add(cg);
         JButton btnStart = new JButton("Start");
         JButton btnStop = new JButton("Stop");
         panel2.add(btnStart);
@@ -89,6 +103,13 @@ public class PanTabbedP extends JPanel {
         }
     }
 
+    class SpriteChooser implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        }
+    }
+
     class Faller implements ActionListener {
 
         @Override
@@ -97,8 +118,8 @@ public class PanTabbedP extends JPanel {
             String b = btn.getText();
             if (b.equals("Start")) {
                 panButtonTimer.start(b);
-            }else if (b.equals("Stop")){
-                panButtonTimer.stop(s);
+            } else if (b.equals("Stop")) {
+                panButtonTimer.stop(b);
             }
         }
     }

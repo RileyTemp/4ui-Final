@@ -8,8 +8,8 @@ public class SprCar {
 
     private Image img;
     int i;
-    int x, y, bx, by, dx, dy, backgroundX;
-    int Speed = 5;
+    int x, y;
+    double dx, dy;
     boolean left, right, up, down;
     ImageIcon p1 = new ImageIcon("carL.png");// Looking Left
     ImageIcon p2 = new ImageIcon("carR.png");// Looking Right
@@ -60,7 +60,7 @@ public class SprCar {
         i = _i;
     }
 
-    public void setX(int _dx) {
+    public void setX(double _dx) {
         dx = _dx;
         x += dx;
         dx = 0;
@@ -71,7 +71,7 @@ public class SprCar {
         }
     }
 
-    public void setY(int _dy) {
+    public void setY(double _dy) {
         dy = _dy;
         y += dy;
         dy = 0;

@@ -5,7 +5,7 @@ import java.awt.event.*;
 
 public class PanButtonTimer {
 
-    String s;
+    String sChoice;
     Timer timer;
     int nCount;
     PanEarth panEarth;
@@ -19,8 +19,8 @@ public class PanButtonTimer {
     }
 
     public void Gravity(String _s) {
-        s = _s;
-        System.out.println(s);
+        sChoice = _s;
+        System.out.println(sChoice);
     }
 
     public void start(String _s) {
@@ -35,12 +35,21 @@ public class PanButtonTimer {
             nCount++;
             System.out.println(nCount);
             if (nCount >= 0) {
-                if (s.equals("Earth")) {
+                if (sChoice.equals("Earth")) {
                     panEarth.moveSprite();
-                } else if (s.equals("Mars")) {
+                    if (panEarth.y == 540) {
+                        timer.stop();
+                    }
+                } else if (sChoice.equals("Mars")) {
                     panMars.moveSprite();
-                } else if (s.equals("Jupiter")) {
+                    if (panMars.y == 540) {
+                        timer.stop();
+                    }
+                } else if (sChoice.equals("Jupiter")) {
                     panJupiter.moveSprite();
+                    if (panJupiter.y == 585) {
+                        timer.stop();
+                    }
                 }
             }
         }

@@ -1,22 +1,22 @@
 package Final;
 
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 
-public class SprAnvil {
+public class SprAstronaut {
 
     private Image img;
     int i;
-    int x, y, by, dx, dy;
-    boolean left, right, up, down;
+    int x, y, dx, dy;
     int nSpeed;
-    ImageIcon p1 = new ImageIcon("anvil1.png");// Looking Left
+    boolean left, right, up, down;
+    ImageIcon p1 = new ImageIcon("astronaut1.png");// Looking Left
     int imgWidth = p1.getIconHeight();
     int imgHeight = p1.getIconWidth();
     Image arnRunning_R[] = new Image[1];
     Rectangle r;
 
-    public SprAnvil() {
+    public SprAstronaut() {
         r = new Rectangle();
         x = 400;
         y = 0;

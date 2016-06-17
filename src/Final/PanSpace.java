@@ -7,34 +7,25 @@ import java.awt.event.*;
 public class PanSpace extends JPanel implements ActionListener {
 
     static boolean drawn = false;
-    Rectangle rB, rE, rP;
     SprRocket sprRocket = new SprRocket();
-    private Timer timer;
-    private Image background;
-    static String sName;
-    Label JLabel;
-    int dx, dy;
-    int Speed = 20;
-    PanTimer panTimer;
-    String s;
-    int nCount = 0;
-    String sSame = "h";
+    Timer timer;
+    Timer timerMove;
+    Image background;
+    int i = 0;
+    double dVel = 20, dAcc, dx, dy;
+    String sDir;
 
-    public PanSpace(PanTimer _panTimer) {
-        panTimer = _panTimer;
+    public PanSpace() {
         addKeyListener(new Movement());
         setFocusable(true);
         ImageIcon i1 = new ImageIcon("space.jpg");
         background = i1.getImage();
-        //timer = new Timer(80,this);
-        // timer.start();
+        timerMove = new Timer(50, Mover);
     }
 
     public void Timer(Timer timer) {
-        timer = new Timer(80, this);
+        timer = new Timer(1, this);
         timer.start();
-        nCount++;
-        System.out.println(nCount);
     }
 
     public void actionPerformed(ActionEvent arg0) {
@@ -54,77 +45,78 @@ public class PanSpace extends JPanel implements ActionListener {
 
         @Override
         public void keyReleased(KeyEvent w) {
-            dy = 0;
-            dx = 0;
+            System.out.println(sDir);
+            if (sDir.equals("a") || sDir.equals("d") || sDir.equals("w") || sDir.equals("s")) {
+                timerMove.start();
+                dAcc = .9;
+            } else {
+            }
         }
 
         @Override
         public void keyPressed(KeyEvent w) {
             int code = w.getKeyCode();
-            System.out.println(sSame);
+            timerMove.stop();
+            dAcc = 1.07;
             if (code == KeyEvent.VK_A) {
-                s = "a";
-                if (!sSame.equals(s)) {
-                    Speed = 20;
-                }
-                sprRocket.setSide(0);
-                sSame = s;
-                panTimer.start(s);
-                dx = -Speed;
+                i = 0;
+                sprRocket.setSide(i);
+                sDir = "a";
+                dVel *= dAcc;
+                dx = -dVel;
                 sprRocket.setX(dx);
-                if (panTimer.nCount > nCount) {
-                    Speed += 10;
-                    nCount = panTimer.nCount;
-                }
             } else if (code == KeyEvent.VK_D) {
-                s = "d";
-                if (!sSame.equals(s)) {
-                    Speed = 20;
-                }
-                sprRocket.setSide(1);
-                sSame = s;
-                panTimer.start(s);
-                dx = Speed;
+                i = 1;
+                sprRocket.setSide(i);
+                sDir = "d";
+                dVel *= dAcc;
+                dx = dVel;
                 sprRocket.setX(dx);
-                if (panTimer.nCount > nCount) {
-                    Speed += 10;
-                    nCount = panTimer.nCount;
-                }
             } else if (code == KeyEvent.VK_W) {
-                s = "w";
-                if (!sSame.equals(s)) {
-                    Speed = 20;
-                }
-                sprRocket.setSide(2);
-                sSame = s;
-                panTimer.start(s);
-                dy = -Speed;
+                i = 2;
+                sprRocket.setSide(i);
+                sDir = "w";
+                dVel *= dAcc;
+                dy = -dVel;
                 sprRocket.setY(dy);
-                if (panTimer.nCount > nCount) {
-                    Speed += 10;
-                    nCount = panTimer.nCount;
-                }
             } else if (code == KeyEvent.VK_S) {
-                s = "s";
-                if (!sSame.equals(s)) {
-                    Speed = 20;
-                }
-                sprRocket.setSide(3);
-                sSame = s;
-                panTimer.start(s);
-                dy = Speed;
+                i = 3;
+                sprRocket.setSide(i);
+                sDir = "s";
+                dVel *= dAcc;
+                dy = dVel;
                 sprRocket.setY(dy);
-                if (panTimer.nCount > nCount) {
-                    Speed += 10;
-                    nCount = panTimer.nCount;
-                }
+            } else {
+                sDir = "none of the above";
             }
-            if (Speed > 40) {
-                Speed = 40;
+
+            if (dVel > 75) {
+                dVel = 75;
             }
         }
     }
+    ActionListener Mover = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            dVel *= dAcc;
+            if (sDir.equals("a")) {
+                dx = -dVel;
+                sprRocket.setX(dx);
+            } else if (sDir.equals("d")) {
+                dx = dVel;
+                sprRocket.setX(dx);
+            } else if (sDir.equals("w")) {
+                dy = -dVel;
+                sprRocket.setY(dy);
+            } else if (sDir.equals("s")) {
+                dy = dVel;
+                sprRocket.setY(dy);
+            }
 
-    void display(int n) {
-    }
+            if (dVel <= .5) {
+                timerMove.stop();
+                dVel = 5;
+            }
+        }
+    };
 }

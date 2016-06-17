@@ -7,8 +7,10 @@ import java.awt.event.*;
 public class PanDispP extends JPanel {
 
     String backgrounds;
-    JPanel panMaster;
-    CardLayout cardLayout;
+    SprAnvil sprAnvil = new SprAnvil();
+    SprAstronaut sprAstronaut = new SprAstronaut();
+    SprLeaf sprLeaf = new SprLeaf();
+    SprSkydiver sprSkydiver = new SprSkydiver();
     PanSidewalk panSidewalk;
     PanSpace panSpace;
     PanRoad panRoad;
@@ -16,9 +18,10 @@ public class PanDispP extends JPanel {
     PanEarth panEarth;
     PanMars panMars;
     PanJupiter panJupiter;
+    String sSprite;
     public Timer timer;
 
-    void BackgroundChooser(String _s, PanSidewalk _panSidewalk, PanSpace _panSpace, PanRoad _panRoad, PanSkatePark _panPark, PanEarth _panEarth, PanMars _panMars, PanJupiter _panJupiter) {
+    public void BackgroundChooser(String _s, PanSidewalk _panSidewalk, PanSpace _panSpace, PanRoad _panRoad, PanSkatePark _panPark, PanEarth _panEarth, PanMars _panMars, PanJupiter _panJupiter) {
 
         setLayout(new BorderLayout());
         backgrounds = _s;
@@ -70,11 +73,21 @@ public class PanDispP extends JPanel {
         }
     }
 
+    public void SpriteChooser(String _sSprite) {
+        sSprite = _sSprite;
+        System.out.println(sSprite);
+        if (backgrounds.equals("Earth")) {
+            panEarth.setSprite(sSprite);
+            panEarth.reset();
+        } else if (backgrounds.equals("Mars")) {
+            panMars.setSprite(sSprite);
+            panMars.reset();
+        } else if (backgrounds.equals("Jupiter")) {
+            panJupiter.setSprite(sSprite);
+            panJupiter.reset();
+        }
+    }
+
     public PanDispP() {
     }
 }
-
-    /*setLayout(new BorderLayout());
-     JLabel background = new JLabel(new ImageIcon("FHCI.jpg"));
-     add(background);
-     background.setLayout(new FlowLayout());*/

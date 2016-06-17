@@ -7,31 +7,26 @@ import java.awt.event.*;
 public class PanRoad extends JPanel implements ActionListener {
 
     static boolean drawn = false;
-    Rectangle rB, rE, rP;
     SprCar sprCar = new SprCar();
-    private Timer timer;
-    private Image background;
-    static String sName;
-    Label JLabel;
-    int dx, dy;
-    int Speed = 10;
-    PanTimer panTimer;
-    String s;
+    Timer timer;
+    Timer timerMove;
+    Image background;
+    double dx, dy, dVel = 10, dAcc;
+    int i;
+    String sDir;
     int nCount = 0;
-    String sSame = "h";
 
-    public PanRoad(PanTimer _panTimer) {
-        panTimer = _panTimer;
+    public PanRoad() {
+
         addKeyListener(new Movement());
         setFocusable(true);
         ImageIcon i1 = new ImageIcon("road.jpg");
         background = i1.getImage();
-        //timer = new Timer(80,this);
-        // timer.start();
+        timerMove = new Timer(50, Mover);
     }
 
     public void Timer(Timer timer) {
-        timer = new Timer(80, this);
+        timer = new Timer(1, this);
         timer.start();
     }
 
@@ -52,75 +47,73 @@ public class PanRoad extends JPanel implements ActionListener {
 
         @Override
         public void keyReleased(KeyEvent w) {
-            dy = 0;
-            dx = 0;
+            System.out.println(sDir);
+            if (sDir.equals("a") || sDir.equals("d") || sDir.equals("w") || sDir.equals("s")) {
+                timerMove.start();
+                dAcc = .9;
+            } else {
+            }
         }
 
         @Override
         public void keyPressed(KeyEvent w) {
             int code = w.getKeyCode();
-            System.out.println(sSame);
+            timerMove.stop();
+            dAcc = 1.03;
             if (code == KeyEvent.VK_A) {
-                s = "a";
-                if (!sSame.equals(s)) {
-                    Speed = 10;
-                }
-                sprCar.setSide(0);
-                sSame = s;
-                panTimer.start(s);
-                dx = -Speed;
+                i = 0;
+                sprCar.setSide(i);
+                sDir = "a";
+                dVel *= dAcc;
+                dx = -dVel;
                 sprCar.setX(dx);
-                if (panTimer.nCount > nCount) {
-                    Speed += 5;
-                    nCount = panTimer.nCount;
-                }
             } else if (code == KeyEvent.VK_D) {
-                s = "d";
-                if (!sSame.equals(s)) {
-                    Speed = 10;
-                }
-                sprCar.setSide(1);
-                sSame = s;
-                panTimer.start(s);
-                dx = Speed;
+                sprCar.setSide(i);
+                i = 1;
+                sDir = "d";
+                dVel *= dAcc;
+                dx = dVel;
                 sprCar.setX(dx);
-                if (panTimer.nCount > nCount) {
-                    Speed += 5;
-                    nCount = panTimer.nCount;
-                }
             } else if (code == KeyEvent.VK_W) {
-                s = "w";
-                if (!sSame.equals(s)) {
-                    Speed = 10;
-                }
-                sSame = s;
-                panTimer.start(s);
-                dy = -Speed;
+                sDir = "w";
+                dVel *= dAcc;
+                dy = -dVel;
                 sprCar.setY(dy);
-                if (panTimer.nCount > nCount) {
-                    Speed += 5;
-                    nCount = panTimer.nCount;
-                }
             } else if (code == KeyEvent.VK_S) {
-                s = "s";
-                if (!sSame.equals(s)) {
-                    Speed = 10;
-                }
-                sSame = s;
-                panTimer.start(s);
-                dy = Speed;
+                sDir = "s";
+                dVel *= dAcc;
+                dy = dVel;
                 sprCar.setY(dy);
-                if (panTimer.nCount > nCount) {
-                    Speed += 5;
-                    nCount = panTimer.nCount;
-                }
+            } else {
+                sDir = "none of the above";
             }
-            if (Speed > 33) {
-                Speed = 33;
+            if (dVel > 50) {
+                dVel = 50;
             }
         }
     }
-
-    void display(int n) {
-    }
+    ActionListener Mover = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            nCount++;
+            dVel *= dAcc;
+            if (sDir.equals("a")) {
+                dx = -dVel;
+                sprCar.setX(dx);
+            } else if (sDir.equals("d")) {
+                dx = dVel;
+                sprCar.setX(dx);
+            } else if (sDir.equals("w")) {
+                dy = -dVel;
+                sprCar.setY(dy);
+            } else if (sDir.equals("s")) {
+                dy = dVel;
+                sprCar.setY(dy);
+            }
+            if (dVel <= .5) {
+                timerMove.stop();
+                dVel = 5;
+            }
+        }
+    };
 }

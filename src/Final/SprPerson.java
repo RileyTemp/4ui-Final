@@ -8,8 +8,9 @@ public class SprPerson {
 
     private Image img;
     int i;
-    int x, y, bx, by, dx, dy, backgroundX;
-    int Speed = 5;
+    int x, y;
+    double dx,dy;
+
     boolean left, right, up, down;
     ImageIcon p1 = new ImageIcon("walkingL.png");// Looking Left
     ImageIcon p2 = new ImageIcon("walkingR.png");// Looking Right
@@ -60,7 +61,7 @@ public class SprPerson {
         i = _i;
     }
 
-    public void setY(int _dy) {
+    public void setY(double _dy) {
         dy = _dy;
         y += dy;
         dy = 0;
@@ -71,7 +72,7 @@ public class SprPerson {
         }
     }
 
-    public void setX(int _dx) {
+    public void setX(double _dx) {
         dx = _dx;
         x += dx;
         dx = 0;

@@ -7,14 +7,11 @@ import java.awt.event.ActionListener;
 
 public class PanPhysics extends JPanel {
 
-    JPanel panMaster;
-    CardLayout cardLayout;
     PanDispP panDispP = new PanDispP();
-    PanTimer panTimer = new PanTimer();
-    PanSidewalk panSidewalk = new PanSidewalk(panTimer);
-    PanRoad panRoad = new PanRoad(panTimer);
-    PanSpace panSpace = new PanSpace(panTimer);
-    PanSkatePark panPark = new PanSkatePark(panTimer);
+    PanSidewalk panSidewalk = new PanSidewalk();
+    PanRoad panRoad = new PanRoad();
+    PanSpace panSpace = new PanSpace();
+    PanSkatePark panPark = new PanSkatePark();
     PanEarth panEarth = new PanEarth();
     PanMars panMars = new PanMars();
     PanJupiter panJupiter = new PanJupiter();
